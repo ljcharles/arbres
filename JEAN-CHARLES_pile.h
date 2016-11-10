@@ -19,17 +19,15 @@ bool vide(PILE p){
 	return (p == 0);
 }
 
-void ajouter(int e, PILE p){ /*empile e sur la pile */
-	int suivant = 0;
+void ajouter(PILE p, int e){ /*empile e sur la pile */
 	p[0]++;
-	suivant = p[0];
-	p[ suivant ] = e;
+	p[ p[0] ] = e;
 }
 
 void supprimer(PILE p){ /*depile le sommet de la pile */
-	if(!vide(p)) p[0]--;
+	p[0]--;
 }
 
-int som(PILE p){ /*retourne le sommet de p*/
-    if(!vide(p)) return p[p[0]];
+int val(PILE p){ /*retourne le sommet de p*/
+    return p[p[0]];
 }
