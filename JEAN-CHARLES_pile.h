@@ -4,37 +4,32 @@
 //09/11/2016
 //Le programme compile 
 
-#define MAX 100 /*hauteur de pile*/
+//n représente le nombre de sommets que pourrait contenir l'arbre
+const int x=100;
+//On définit un tableau qui contiendra jusqu'à 100 éléments
+typedef int PILE[x];
 
-typedef struct {
-	int tab [MAX];
-	int ind;
-} PILE;
-
-PILE creer(PILE p){
+void creer(PILE p){
 /*creation d’une pile vide*/
-	p.ind = 0;
-	p.tab[0] = 0;
-	return p;
+	p[0] = 0;
 }
 
 bool vide(PILE p){
 /* renvoie vrai si la pile est vide*/
-	return (p.ind == -1);
+	return (p == 0);
 }
 
 void ajouter(int e, PILE p){ /*empile e sur la pile */
-if(p.ind < MAX-1){
-	int i=p.ind++;
-	p.tab[i]=e;
-	p.ind=i;
- }
+	int suivant = 0;
+	p[0]++;
+	suivant = p[0];
+	p[ suivant ] = e;
 }
 
 void supprimer(PILE p){ /*depile le sommet de la pile */
-	if(!vide(p)) p.ind = p.ind-1;
+	if(!vide(p)) p[0]--;
 }
 
 int som(PILE p){ /*retourne le sommet de p*/
-    if(!vide(p)) return p.tab[p.ind];
+    if(!vide(p)) return p[p[0]];
 }

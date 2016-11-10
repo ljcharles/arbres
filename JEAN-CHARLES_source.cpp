@@ -20,7 +20,7 @@
 // On inclut cette bibliothèque pour gérer la partie sortie et entrée du langage c
 #include <stdio.h>
 #include <stdlib.h>
-#include "pile.h"
+#include "JEAN-CHARLES_pile.h"
 
 //n représente le nombre de sommets que pourrait contenir l'arbre
 const int n=100;
@@ -261,13 +261,15 @@ void parcoursPreordre(int racine,tab FG, tab FD){
 		supprimer(P);
 
 		for(int i=0; i < sizeof(FD); i++){
-			racine = FD[2*racine+1];
-			if(racine != 0) ajouter(racine, P);
+			int gauche = FD[2*racine+1];
+			if(gauche != 0) ajouter(gauche, P);
+			racine = gauche;
 		}
 
 		for(int i=0; i < sizeof(FG); i++){
-			racine = FG[2*racine];
-			if(racine != 0) ajouter(racine, P);
+			int droit = FG[2*racine];
+			if(droit != 0) ajouter(droit, P);
+			racine = droit;
 		}	
 	}
 }//Affiche les sommets de l'arbre binaire en effectuant un parcours en préordre
