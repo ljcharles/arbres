@@ -249,6 +249,7 @@ void supprimerSommet(int x,int r,tab FG, tab FD, tab Info){
 
 }//supprime un sommet dans un arbre (la valeur est donnée)
 
+<<<<<<< HEAD
 void construirArbre(tab arbreBin)
 {
 	char val;
@@ -364,6 +365,34 @@ void parcoursPreordre(int racine,tab FG, tab FD, tab arbreBin){
 		if(x != 0) ajouter(p, 2 * x);
 
 	}
+=======
+void parcoursPreordre(int racine,tab FG, tab FD, tab arbreBin){
+	PILE p;
+	int som = 1;
+	int x;
+
+	arbreBin[som] = racine;
+
+	for(; som < sizeof(FG); som++) arbreBin[2 * som] = FG[som];
+		
+	for(; som < sizeof(FD); som++) arbreBin[2 * som + 1] = FD[som];
+
+	creer(p);
+	ajouter(p,1);
+
+	printf("\nVALEUR :  ");
+
+	while(!vide(p))
+	{
+		x = val(p);
+		supprimer(p);
+        
+		printf(" [ %d ] ", arbreBin[x]);
+		ajouter(p, 2 * x + 1);
+		ajouter(p, 2 * x);
+
+	}
+>>>>>>> origin/master
 
 }//Affiche les sommets de l'arbre binaire en effectuant un parcours en préordre
 
@@ -374,8 +403,13 @@ int main(){
 	//afficheArbre(PS,LS,nb_sommet);
 	//affichage_fils_frere(PS, LS, nb_sommet);
 
+<<<<<<< HEAD
 	//tab FG = { 0,2,0,3,5,0,0,0};
 	//tab FD = { 0,1,0,6,7,0,0,0};
+=======
+	tab FG = { 0,2,0,3,5,0,0,0};
+	tab FD = { 0,1,0,6,7,0,0,0};
+>>>>>>> origin/master
 	tab arbreBin;
 	//tab Info = {1,2,3,4,5,6}; 
 	//int x=0;
@@ -387,10 +421,14 @@ int main(){
 
 	//supprimerSommet(x,r,FG,FD,Info);
 
+<<<<<<< HEAD
 	//parcoursPreordre(r,FG,FD,arbreBin);
 
 	construirArbre(arbreBin);
 	afficherArbrePreordre(arbreBin);
+=======
+	parcoursPreordre(r,FG,FD,arbreBin);
+>>>>>>> origin/master
 
 	getchar();
     flushall(); 
