@@ -25,7 +25,7 @@
 //n représente le nombre de sommets que pourrait contenir l'arbre
 const int n=100;
 //On définit un tableau qui contiendra jusqu'à 15 éléments
-typedef int tab[n];
+typedef char tab[n];
 
 
 void implementerArbre(tab PS, tab LS, int *nb_som){
@@ -249,6 +249,89 @@ void supprimerSommet(int x,int r,tab FG, tab FD, tab Info){
 
 }//supprime un sommet dans un arbre (la valeur est donnée)
 
+void construirArbre(tab arbreBin)
+{
+	char val;
+	int som, compteur;
+    PILE p;
+	
+	som = 1;
+	compteur = 0;
+
+	printf("Donnez la racine de l'arbre :\n");
+	scanf("%c", &val);
+	flushall();
+	arbreBin[som] = val;
+	
+
+	if(val != '\n')
+	{
+		compteur = 1;
+	}
+
+	while(compteur > 0)
+	{
+		while(arbreBin[som] == '\n')
+		{
+			som++;
+		}
+
+		if(arbreBin[som] != '\n')
+		{
+			printf("\nTaper le fils gauche du sommet %d pour sortir appuyez sur Entree :\n", som);
+			scanf("%c", &val);
+			flushall();
+			arbreBin[2 * som] = val;
+			
+			if(val != '\n')
+			{
+				compteur++;
+			}
+		
+			printf("\nTaper le fils droit du sommet %d pour sortir appuyez sur Entree :\n", som);
+			scanf("%c", &val);
+			flushall();
+			arbreBin[2 * som + 1] = val;
+
+			
+			if(val != '\n')
+			{
+				compteur++;
+			}
+		}
+
+		som++;
+		compteur--;
+	}
+
+}
+
+void afficherArbrePreordre(tab arbreBin)
+{
+	int x;
+	PILE p;
+
+	creer(p);
+	ajouter(p, 1);
+
+	printf("\nVALEUR :  ");
+
+	while(!vide(p))
+	{
+		x = valeur(p);
+		supprimer(p);
+
+		if(arbreBin[x] != '\n')
+		{
+			printf("%c ", arbreBin[x]);
+			ajouter(p, 2 * x + 1);
+			ajouter(p, 2 * x);
+		}
+
+	}
+	printf("\n");
+}
+
 void parcoursPreordre(int racine,tab FG, tab FD, tab arbreBin){
 	PILE p;
 	int som = 1;
@@ -256,9 +339,15 @@ void parcoursPreordre(int racine,tab FG, tab FD, tab arbreBin){
 
 	arbreBin[som] = racine;
 
-	for(; som < sizeof(FG); som++) arbreBin[2 * som] = FG[som];
+	for(; som < sizeof(FG); som++){
+		arbreBin[2 * som] = FG[som];
+		som++;
+	}
 		
-	for(; som < sizeof(FD); som++) arbreBin[2 * som + 1] = FD[som];
+	for(; som < sizeof(FD); som++){
+		arbreBin[2 * som + 1] = FD[som];
+		som++;
+	}
 
 	creer(p);
 	ajouter(p,1);
@@ -267,12 +356,12 @@ void parcoursPreordre(int racine,tab FG, tab FD, tab arbreBin){
 
 	while(!vide(p))
 	{
-		x = val(p);
+		x = valeur(p);
 		supprimer(p);
         
-		printf(" [ %d ] ", arbreBin[x]);
-		ajouter(p, 2 * x + 1);
-		ajouter(p, 2 * x);
+		printf(" [ %c ] ", arbreBin[x]);
+		if(x != 0) ajouter(p, 2 * x + 1);
+		if(x != 0) ajouter(p, 2 * x);
 
 	}
 
@@ -285,8 +374,8 @@ int main(){
 	//afficheArbre(PS,LS,nb_sommet);
 	//affichage_fils_frere(PS, LS, nb_sommet);
 
-	tab FG = { 0,2,0,3,5,0,0,0};
-	tab FD = { 0,1,0,6,7,0,0,0};
+	//tab FG = { 0,2,0,3,5,0,0,0};
+	//tab FD = { 0,1,0,6,7,0,0,0};
 	tab arbreBin;
 	//tab Info = {1,2,3,4,5,6}; 
 	//int x=0;
@@ -298,7 +387,10 @@ int main(){
 
 	//supprimerSommet(x,r,FG,FD,Info);
 
-	parcoursPreordre(r,FG,FD,arbreBin);
+	//parcoursPreordre(r,FG,FD,arbreBin);
+
+	construirArbre(arbreBin);
+	afficherArbrePreordre(arbreBin);
 
 	getchar();
     flushall(); 
